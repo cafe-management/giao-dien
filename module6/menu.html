@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quán Cà Phê</title>
+  <!-- Nhúng Tailwind CSS qua CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow">
+    <div class="container mx-auto px-4 py-4 relative">
+      <h1 class="text-2xl font-bold text-center">Quán Cà Phê</h1>
+      <!-- Nút Gọi Phục Vụ đặt trong header (ở phía trên bên trái) -->
+      <div id="callService" class="absolute top-2 left-2 bg-orange-500 text-white p-2 rounded-full cursor-pointer shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a2 2 0 011.85 1.26l1.08 3.23a2 2 0 01-.45 1.88l-2.2 2.2a11.36 11.36 0 005.29 5.29l2.2-2.2a2 2 0 011.88-.45l3.23 1.08A2 2 0 0121 15.72V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+        <span class="ml-1 text-sm">Gọi Phục Vụ</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-6">
+    <!-- Phần chọn danh mục -->
+    <section class="mb-6">
+      <h2 class="text-xl font-semibold mb-4">Chọn Danh Mục</h2>
+      <div class="flex space-x-4 overflow-x-auto">
+        <!-- Các nút danh mục sử dụng màu chủ đạo #E7B45A -->
+        <button class="category-btn bg-[#E7B45A] text-white px-4 py-2 rounded-full whitespace-nowrap">Tất Cả</button>
+        <button class="category-btn bg-[#E7B45A]/30 text-[#E7B45A] px-4 py-2 rounded-full whitespace-nowrap">Cà Phê</button>
+        <button class="category-btn bg-[#E7B45A]/30 text-[#E7B45A] px-4 py-2 rounded-full whitespace-nowrap">Trà</button>
+        <button class="category-btn bg-[#E7B45A]/30 text-[#E7B45A] px-4 py-2 rounded-full whitespace-nowrap">Bánh Ngọt</button>
+        <button class="category-btn bg-[#E7B45A]/30 text-[#E7B45A] px-4 py-2 rounded-full whitespace-nowrap">Sinh Tố</button>
+      </div>
+    </section>
+
+    <!-- Phần danh sách sản phẩm -->
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Danh Sách Sản Phẩm</h2>
+      <!-- Grid sản phẩm: mặc định 2 cột, tăng dần theo kích thước màn hình -->
+      <div id="productGrid" class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <!-- Các sản phẩm sẽ được render bởi JavaScript -->
+      </div>
+      <!-- Phân trang -->
+      <div id="pagination" class="mt-6 flex justify-center"></div>
+    </section>
+  </main>
+
+  <!-- Icon Giỏ Hàng (ẩn mặc định, hiển thị khi có sản phẩm) -->
+  <div id="cartIcon" class="fixed bottom-4 right-4 text-white p-3 rounded-none cursor-pointer shadow-lg hidden" style="background-color: #E7B45A;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m12-9l2 9m-6-9v9" />
+    </svg>
+    <span id="cartCount" class="ml-2 font-bold">0</span>
+  </div>
+
+  <!-- Icon Tình Trạng Đơn Hàng (để kích hoạt modal đánh giá) -->
+  <div id="orderStatusIcon" class="fixed bottom-20 right-4 bg-green-500 text-white p-3 rounded cursor-pointer shadow-lg hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 110-18 9 9 0 010 18z" />
+    </svg>
+    <span class="ml-1 text-sm">Đánh Giá</span>
+  </div>
+
+  <!-- Icon Tính Tiền (hiển thị nếu chưa bấm Tính Tiền) -->
+  <div id="payIcon" class="fixed bottom-4 right-4 text-white p-3 rounded-none cursor-pointer shadow-lg hidden" style="background-color: #E7B45A;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <!-- Icon ví (wallet) -->
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a5 5 0 00-10 0v2" />
+      <rect x="5" y="9" width="14" height="10" rx="2" ry="2" />
+    </svg>
+    <span class="ml-1 text-sm">Tính Tiền</span>
+  </div>
+
+  <!-- Modal Đơn Hàng -->
+  <div id="cartModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-11/12 max-w-md">
+      <h2 class="text-xl font-bold mb-4">Bàn Số T01</h2>
+      <div id="cartItems" class="mb-4 max-h-60 overflow-y-auto">
+        <!-- Danh sách sản phẩm trong giỏ hàng sẽ được render tại đây -->
+      </div>
+      <div id="cartTotal" class="font-bold mb-4"></div>
+      <!-- Nút Gọi Món (màu #E7B45A) và Nút Đóng (màu đỏ) -->
+      <button id="orderButton" class="bg-[#E7B45A] text-white px-4 py-2 rounded w-full mb-2">
+        Gọi Món
+      </button>
+      <button id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded w-full">
+        Đóng
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Tình Trạng Đơn Hàng (nếu hoàn thành) -->
+  <div id="orderStatusModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-11/12 max-w-md">
+      <h2 class="text-xl font-bold mb-4">Tình Trạng Đơn Hàng</h2>
+      <p id="orderStatusText" class="mb-4">Đơn hàng của bạn đã hoàn thành. Vui lòng tính tiền.</p>
+      <!-- Nút Tính Tiền (màu #E7B45A) -->
+      <button id="payButton" class="bg-[#E7B45A] text-white px-4 py-2 rounded w-full mb-2 hidden">
+        Tính Tiền
+      </button>
+      <button id="closeOrderStatusModal" class="bg-red-500 text-white px-4 py-2 rounded w-full">
+        Đóng
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Đánh Giá -->
+  <div id="reviewModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg w-11/12 max-w-md">
+      <h2 class="text-xl font-bold mb-4">Đánh Giá</h2>
+      <form id="reviewForm">
+        <div class="mb-4">
+          <label for="fullName" class="block text-gray-700">Họ và Tên:</label>
+          <input type="text" id="fullName" class="w-full border border-gray-300 rounded px-3 py-2" placeholder="Nhập họ và tên" required>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700">Email:</label>
+          <input type="email" id="email" class="w-full border border-gray-300 rounded px-3 py-2" placeholder="Nhập email" required>
+        </div>
+        <div class="mb-4">
+          <label for="review" class="block text-gray-700">Đánh Giá:</label>
+          <textarea id="review" class="w-full border border-gray-300 rounded px-3 py-2" placeholder="Nhập đánh giá của bạn" required></textarea>
+        </div>
+        <div class="flex space-x-4">
+          <button type="submit" class="bg-[#E7B45A] text-white px-4 py-2 rounded w-full">Gửi Đánh Giá</button>
+          <button type="button" id="closeReviewModal" class="bg-red-500 text-white px-4 py-2 rounded w-full">Hủy</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    // Dữ liệu sản phẩm
+    const products = [
+      { id: 1, name: "Espresso", category: "Cà Phê", price: "50,000 VND", image: "473602138_660312466652103_6139515810839316335_n.jpg" },
+      { id: 2, name: "Latte", category: "Cà Phê", price: "60,000 VND", image: "473602138_660312466652103_6139515810839316335_n.jpg" },
+      { id: 3, name: "Cappuccino", category: "Cà Phê", price: "65,000 VND", image: "473602138_660312466652103_6139515810839316335_n.jpg" },
+      { id: 4, name: "Bánh Ngọt", category: "Bánh Ngọt", price: "30,000 VND", image: "473602138_660312466652103_6139515810839316335_n.jpg" },
+      { id: 5, name: "Trà Sữa", category: "Trà", price: "40,000 VND", image: "473602138_660312466652103_6139515810839316335_n.jpg" },
+      { id: 6, name: "Sinh Tố Dâu", category: "Sinh Tố", price: "45,000 VND", image: "473602138_660312466652103_6139515810839316335_n.jpg" }
+    ];
+
+    let currentCategory = "Tất Cả";
+    let currentPage = 1;
+    const productsPerPage = 4;
+    let cart = [];
+
+    function parsePrice(priceStr) {
+      return parseInt(priceStr.replace("VND", "").replace(/,/g, "").trim());
+    }
+
+    function formatPrice(num) {
+      return num.toLocaleString("vi-VN") + " VND";
+    }
+
+    function renderProducts() {
+      const productGrid = document.getElementById("productGrid");
+      productGrid.innerHTML = "";
+      const filteredProducts = currentCategory === "Tất Cả"
+        ? products
+        : products.filter(product => product.category === currentCategory);
+      const startIndex = (currentPage - 1) * productsPerPage;
+      const paginatedProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
+      paginatedProducts.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "bg-white p-4 rounded-lg shadow relative";
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" class="w-full h-40 object-cover rounded">
+          <h3 class="text-lg font-bold mt-2">${product.name}</h3>
+          <p class="text-gray-600 mt-1">Giá: ${product.price}</p>
+          <button onclick="handleAddProduct(${product.id})" class="absolute top-2 right-2 p-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+        `;
+        productGrid.appendChild(productCard);
+      });
+      renderPagination(filteredProducts.length);
+    }
+
+    function renderPagination(totalProducts) {
+      const paginationContainer = document.getElementById("pagination");
+      paginationContainer.innerHTML = "";
+      const totalPages = Math.ceil(totalProducts / productsPerPage);
+      if (totalPages <= 1) return;
+      const prevButton = document.createElement("button");
+      prevButton.innerText = "Prev";
+      prevButton.className = "bg-gray-300 text-gray-700 px-3 py-1 rounded mr-2";
+      prevButton.disabled = currentPage === 1;
+      prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          renderProducts();
+        }
+      });
+      paginationContainer.appendChild(prevButton);
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement("button");
+        pageButton.innerText = i;
+        pageButton.className = "bg-gray-300 text-gray-700 px-3 py-1 rounded mr-2 " + (currentPage === i ? "bg-blue-500 text-white" : "");
+        pageButton.addEventListener("click", () => {
+          currentPage = i;
+          renderProducts();
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+      const nextButton = document.createElement("button");
+      nextButton.innerText = "Next";
+      nextButton.className = "bg-gray-300 text-gray-700 px-3 py-1 rounded";
+      nextButton.disabled = currentPage === totalPages;
+      nextButton.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderProducts();
+        }
+      });
+      paginationContainer.appendChild(nextButton);
+    }
+
+    function handleAddProduct(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      updateCartIcon();
+    }
+
+    function updateCartIcon() {
+      const cartIcon = document.getElementById("cartIcon");
+      const cartCount = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.innerText = totalItems;
+      if (totalItems > 0) {
+        cartIcon.classList.remove("hidden");
+      } else {
+        cartIcon.classList.add("hidden");
+      }
+    }
+
+    function adjustQuantity(productId, delta) {
+      const item = cart.find(item => item.id === productId);
+      if (!item) return;
+      item.quantity += delta;
+      if (item.quantity < 1) {
+        removeFromCart(productId);
+      }
+      updateCartIcon();
+      renderCartItems();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartIcon();
+      renderCartItems();
+    }
+
+    function updateCartTotal() {
+      const total = cart.reduce((sum, item) => {
+        return sum + parsePrice(item.price) * item.quantity;
+      }, 0);
+      document.getElementById("cartTotal").innerText = "Tổng tiền: " + formatPrice(total);
+    }
+
+    function renderCartItems() {
+      const cartItemsContainer = document.getElementById("cartItems");
+      cartItemsContainer.innerHTML = "";
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Giỏ hàng trống</p>";
+      } else {
+        cart.forEach(item => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "flex items-center justify-between mb-2 border-b pb-1";
+          itemDiv.innerHTML = `
+            <div>
+              <span class="font-bold">${item.name}</span>
+              <div class="flex items-center mt-1">
+                <button onclick="adjustQuantity(${item.id}, -1)" class="bg-gray-300 text-gray-700 px-2 py-1 rounded">-</button>
+                <span class="mx-2">${item.quantity}</span>
+                <button onclick="adjustQuantity(${item.id}, 1)" class="bg-gray-300 text-gray-700 px-2 py-1 rounded">+</button>
+              </div>
+            </div>
+            <div class="flex flex-col items-end">
+              <span>${formatPrice(parsePrice(item.price) * item.quantity)}</span>
+              <button onclick="removeFromCart(${item.id})" class="text-red-500 text-sm mt-1">Xóa</button>
+            </div>
+          `;
+          cartItemsContainer.appendChild(itemDiv);
+        });
+      }
+      updateCartTotal();
+    }
+
+    function setupCategoryClicks() {
+      const categoryButtons = document.querySelectorAll(".category-btn");
+      categoryButtons.forEach(button => {
+        button.addEventListener("click", function() {
+          categoryButtons.forEach(btn => {
+            btn.classList.remove("bg-[#E7B45A]", "text-white");
+            btn.classList.add("bg-[#E7B45A]/30", "text-[#E7B45A]");
+          });
+          this.classList.add("bg-[#E7B45A]", "text-white");
+          this.classList.remove("bg-[#E7B45A]/30", "text-[#E7B45A]");
+          currentCategory = this.innerText.trim();
+          currentPage = 1;
+          renderProducts();
+        });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setupCategoryClicks();
+      renderProducts();
+
+      // Mở modal giỏ hàng khi nhấn icon giỏ hàng
+      document.getElementById("cartIcon").addEventListener("click", () => {
+        document.getElementById("cartModal").classList.remove("hidden");
+        renderCartItems();
+      });
+
+      // Đóng modal giỏ hàng
+      document.getElementById("closeModal").addEventListener("click", () => {
+        document.getElementById("cartModal").classList.add("hidden");
+      });
+
+      // Sự kiện Gọi Món: gửi đơn hàng, sau 3 giây hiển thị modal Tình Trạng Đơn với nút Tính Tiền
+      document.getElementById("orderButton").addEventListener("click", () => {
+        if (cart.length === 0) {
+          alert("Giỏ hàng trống!");
+          return;
+        }
+        alert("Đơn hàng của bạn đã được gửi. Tổng tiền: " + document.getElementById("cartTotal").innerText);
+        cart = [];
+        updateCartIcon();
+        renderCartItems();
+        document.getElementById("cartModal").classList.add("hidden");
+        setTimeout(() => {
+          document.getElementById("orderStatusText").innerText = "Đơn hàng của bạn đã hoàn thành. Vui lòng tính tiền.";
+          // Hiển thị nút Tính Tiền trong modal
+          document.getElementById("payButton").classList.remove("hidden");
+          // Hiển thị modal Tình Trạng Đơn
+          document.getElementById("orderStatusModal").classList.remove("hidden");
+          // Ẩn icon Trạng Thái Đơn (vì modal Tình Trạng Đơn đang được hiển thị)
+          document.getElementById("orderStatusIcon").classList.add("hidden");
+          // Hiển thị icon Tính Tiền để có thể mở lại modal nếu cần
+          document.getElementById("payIcon").classList.remove("hidden");
+        }, 3000);
+      });
+
+      // Sự kiện nút Gọi Phục Vụ
+      document.getElementById("callService").addEventListener("click", () => {
+        alert("Phục vụ đang được gọi. Vui lòng chờ!");
+      });
+
+      // Khi nhấn vào icon Tính Tiền, hiển thị lại modal Tình Trạng Đơn (với nút Tính Tiền)
+      document.getElementById("payIcon").addEventListener("click", () => {
+        document.getElementById("orderStatusModal").classList.remove("hidden");
+      });
+
+      // Sự kiện nút Tính Tiền trong modal: giả lập thanh toán thành công, cập nhật nội dung modal và ẩn nút Tính Tiền, ẩn icon Tính Tiền, hiển thị icon Trạng Thái Đơn để mở modal Đánh Giá
+      document.getElementById("payButton").addEventListener("click", () => {
+        alert("Thanh toán thành công!");
+        document.getElementById("orderStatusText").innerText = "Thanh toán thành công. Vui lòng đánh giá dịch vụ.";
+        document.getElementById("payButton").classList.add("hidden");
+        document.getElementById("payIcon").classList.add("hidden");
+        document.getElementById("orderStatusIcon").classList.remove("hidden");
+      });
+
+      // Khi nhấn vào icon Trạng Thái Đơn, chuyển sang modal Đánh Giá
+      document.getElementById("orderStatusIcon").addEventListener("click", () => {
+        document.getElementById("orderStatusModal").classList.add("hidden");
+        document.getElementById("reviewModal").classList.remove("hidden");
+      });
+
+      // Khi submit form đánh giá, hiển thị thông báo và ẩn modal đánh giá & ẩn icon Trạng Thái Đơn
+      document.getElementById("reviewForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const review = document.getElementById("review").value;
+        alert(`Cảm ơn ${fullName} (${email}) đã đánh giá:\n"${review}"`);
+        document.getElementById("reviewModal").classList.add("hidden");
+        document.getElementById("orderStatusIcon").classList.add("hidden");
+      });
+
+      // Nút Hủy modal đánh giá
+      document.getElementById("closeReviewModal").addEventListener("click", () => {
+        document.getElementById("reviewModal").classList.add("hidden");
+      });
+
+      // Đóng modal Tình Trạng Đơn Hàng (nút Đóng luôn bật)
+      document.getElementById("closeOrderStatusModal").addEventListener("click", () => {
+        document.getElementById("orderStatusModal").classList.add("hidden");
+      });
+    });
+  </script>
+</body>
+</html>
