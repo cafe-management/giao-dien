@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="m-0 p-0">
+<div class="content-wrapper flex flex-col min-h-screen w-full">
+    <!-- header -->
+
+    <nav class="mainNav fixed top-0 left-0 flex justify-between items-center p-4 bg-gray-900 text-white font-[Poppins] w-full">
+        <div class="text-xl font-bold">Logo</div>
+
+        <!-- Nút Mobile -->
+        <button id="toggleOpen" class="lg:hidden absolute right-4 top-4 z-50">
+            <svg class="w-7 h-7 text-[#E7B45A]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                      d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                      clip-rule="evenodd"></path>
+            </svg>
+        </button>
+
+        <!-- Menu chính -->
+        <div id="menu"
+             class="hidden flex flex-col absolute right-0 top-full bg-gray-900 text-white p-4 z-50 w-full
+            lg:!flex lg:items-center lg:space-x-4 lg:static lg:bg-transparent lg:p-0 lg:w-auto lg:flex-row">
+            <a href="#" class="block  text-[#E7B45A] hover:text-white hover:bg-[#E7B45A] font-medium hover:font-bold
+                         transition-all duration-300 transform hover:scale-105 p-2 rounded">Trang chủ</a>
+            <a href="#" class=" block  text-[#E7B45A] hover:text-white hover:bg-[#E7B45A] font-medium hover:font-bold
+                         transition-all duration-300 transform hover:scale-105 p-2 rounded">Giới thiệu</a>
+            <div class="relative flex items-center">
+                <a id="submenu-toggle" href="#" class="block text-[#E7B45A] p-2 leading-normal hover:text-white hover:bg-[#E7B45A]
+            font-medium hover:font-bold transition-all duration-300 transform hover:scale-105 rounded">
+                    Menu
+                </a>
+                <div id="submenu" class="absolute top-full right-0 w-full bg-white text-black shadow-lg opacity-0 invisible
+            transform translate-y-2 transition-all duration-300 p-4 rounded-lg z-50
+            flex flex-col space-y-2 lg:grid lg:grid-cols-3 lg:gap-8 lg:w-max lg:space-y-0">
+                    <div>
+                        <span class="font-bold block mb-2 border-b pb-2 text-[#E7B45A] border-[#E7B45A]">Cà phê</span>
+                        <a href="#" class="block p-1 text-[#E7B45A] hover:text-white hover:bg-[#E7B45A]">Cococcino Recipe</a>
+                        <a href="#" class="block p-1 text-[#E7B45A] hover:text-white hover:bg-[#E7B45A]">Cocoapresso</a>
+                    </div>
+                    <div>
+                        <span class="font-bold block mb-2 border-b pb-2 text-[#E7B45A] border-[#E7B45A]">Trà sữa</span>
+                        <a href="#" class="block p-1 text-[#E7B45A] hover:text-white hover:bg-[#E7B45A]">Trà sữa truyền thống</a>
+                    </div>
+                    <div>
+                        <span class="font-bold block mb-2 border-b pb-2 text-[#E7B45A] border-[#E7B45A]">Trà</span>
+                        <a href="#" class="block p-1 text-[#E7B45A] hover:text-white hover:bg-[#E7B45A]">Trà Olong Vải</a>
+                    </div>
+                </div>
+
+            </div>
+            <a href="#" class="block  text-[#E7B45A] hover:text-white hover:bg-[#E7B45A] font-medium hover:font-bold
+                         transition-all duration-300 transform hover:scale-105 p-2 rounded">Tin tức</a>
+            <a href="#" class="block  text-[#E7B45A] hover:text-white hover:bg-[#E7B45A] font-medium hover:font-bold
+                         transition-all duration-300 transform hover:scale-105 p-2 rounded">Liên hệ</a>
+        </div>
+    </nav>
+
+    <main class="mx-auto px-4 py-8 mt-16 flex-1">
+        <section class="mb-12 text-center">
+            <h2 class="text-2xl font-bold text-center text-[#E7B45A] mb-6">DANA Coffee</h2>
+            <p class="text-center text-lg max-w-4xl mx-auto px-8 italic mb-10">
+                Nơi bạn có thể thưởng thức những ly cà phê đậm đà,
+                được pha chế từ những hạt cà phê nguyên chất, cùng những thức uống tinh tế như trà thanh mát
+                và bánh ngọt thơm lừng. Với không gian ấm cúng và phong cách phục vụ chu đáo,
+                <span class="font-bold">DANA Coffee</span> là lựa chọn lý tưởng để bạn thư giãn, làm việc hay gặp gỡ bạn bè.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Hình ảnh 1 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf_nZi1TPQHppfwDi5HCWShtEn0ymLL7kIpg&s" alt="DANA Coffee" class="w-full h-64 object-cover">
+                </div>
+                <!-- Hình ảnh 2 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU3x_pV41nv-cllaWuWoyWwhoFr3yCQrAV_g&s" alt="DANA Coffee" class="w-full h-64 object-cover">
+                </div>
+                <!-- Hình ảnh 3 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://highlandstationlouisville.com/wp-content/uploads/sites/93/2023/05/coffee-shop-near-our-apartments.jpeg" alt="DANA Coffee" class="w-full h-64 object-cover">
+                </div>
+                <!-- Hình ảnh 4 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://coffeeshopstartups.com/wp-content/uploads/2021/05/How-to-Make-Your-Cafe-Special-683x1024.jpg" alt="DANA Coffee" class="w-full h-64 object-cover">
+                </div>
+            </div>
+        </section>
+        <h2 class="text-2xl font-bold text-center text-[#E7B45A] mb-6">Món nổi bật</h2>
+
+        <div class="relative">
+            <!-- Mũi tên trái -->
+            <button id="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-[#E7B45A] text-white p-2 rounded-full">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M15.293 4.293a1 1 0 011.414 1.414L9.414 11H16a1 1 0 110 2H8a1 1 0 01-1-1V5a1 1 0 012 0v5.586L15.293 4.293z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+
+            <!-- Mũi tên phải -->
+            <button id="next" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-[#E7B45A] text-white p-2 rounded-full">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.707 15.707a1 1 0 011.414-1.414L10.586 9H4a1 1 0 110-2h8a1 1 0 011 1v8a1 1 0 01-2 0v-5.586L4.707 15.707z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+
+            <!-- Slider chứa 3 món -->
+            <div id="product-slider" class="flex overflow-x-hidden pb-4 transition-transform duration-500 space-x-6">
+                <!-- Món 1 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://simexcodl.com.vn/wp-content/uploads/2024/05/ca-phe-sua-hat-1.jpg" alt="Cà phê sữa" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Cà phê sữa</h3>
+                        <p class="text-gray-600">Hương vị thơm ngon, đậm đà</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-[#E7B45A] font-bold text-lg">50.000đ</span>
+                            <button class="bg-[#E7B45A] text-white px-4 py-2 rounded-lg hover:bg-[#d99c44] transition">
+                                Đặt ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Món 2 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://bizweb.dktcdn.net/100/421/036/files/cach-nau-tra-sua-truyen-thong-de-ban-2.jpg?v=1616644748197" alt="Trà sữa truyền thống" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Trà sữa truyền thống</h3>
+                        <p class="text-gray-600">Trà sữa thơm béo, trân châu dai giòn</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-[#E7B45A] font-bold text-lg">45.000đ</span>
+                            <button class="bg-[#E7B45A] text-white px-4 py-2 rounded-lg hover:bg-[#d99c44] transition">
+                                Đặt ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Món 3 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://cdn.tgdd.vn/2021/11/CookDish/cach-lam-matcha-latte-nong-thom-beo-cho-ngay-dong-them-am-ap-avt-1200x676-1.jpg" alt="Trà Matcha Latte" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Trà Matcha Latte</h3>
+                        <p class="text-gray-600">Hương vị matcha Nhật Bản thanh mát</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-[#E7B45A] font-bold text-lg">55.000đ</span>
+                            <button class="bg-[#E7B45A] text-white px-4 py-2 rounded-lg hover:bg-[#d99c44] transition">
+                                Đặt ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Các món ẩn đi (món 4 và 5) -->
+            <div id="next-products" class="flex space-x-6 hidden">
+                <!-- Món 4 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWSpmhjjHexhF14eRcMYppjSWvpxNyB4_QWA&s" alt="Cà phê Espresso" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Cococcino Recipe</h3>
+                        <p class="text-gray-600">Đậm đà, đầy năng lượng</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-[#E7B45A] font-bold text-lg">60.000đ</span>
+                            <button class="bg-[#E7B45A] text-white px-4 py-2 rounded-lg hover:bg-[#d99c44] transition">
+                                Đặt ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Món 5 -->
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-all duration-300">
+                    <img src="https://kotavn.com/wp-content/uploads/2023/05/175449365_124635953031885_2116112830699819652_n-300x300.jpg" alt="Cà phê lạnh" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Trà Olong Vải</h3>
+                        <p class="text-gray-600">Mát lạnh, thích hợp cho mùa hè</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-[#E7B45A] font-bold text-lg">70.000đ</span>
+                            <button class="bg-[#E7B45A] text-white px-4 py-2 rounded-lg hover:bg-[#d99c44] transition">
+                                Đặt ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="bg-gray-800 py-12">
+            <h2 class="text-2xl font-bold text-center text-[#E7B45A] mb-6">Khách hàng nói gì</h2>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <p class="italic text-gray-600">"Cà phê ở đây thật tuyệt! Mùi hương thơm lừng, đậm đà."</p>
+                    <p class="mt-4 font-bold text-gray-800">Nguyễn Thị Lan</p>
+                    <p class="text-sm text-gray-500">Khách hàng</p>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+                    <p class="italic text-gray-600">"Không gian quán rất thoải mái, là nơi lý tưởng để làm việc và thư giãn."</p>
+                    <p class="mt-4 font-bold text-gray-800">Trần Văn Minh</p>
+                    <p class="text-sm text-gray-500">Khách hàng</p>
+                </div>
+            </div>
+        </section>
+        <section class="bg-[#E7B45A] py-12 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">Đăng ký nhận bản tin</h2>
+            <p class="text-lg text-white mb-6">Nhận thông tin mới nhất về các sản phẩm, ưu đãi đặc biệt và sự kiện tại DANA Coffee.</p>
+            <form class="flex justify-center">
+                <input type="email" placeholder="Nhập email của bạn" class="p-3 rounded-l-lg border-2 border-[#E7B45A]">
+                <button type="submit" class="bg-[#E7B45A] text-white p-3 rounded-r-lg">Đăng ký</button>
+            </form>
+        </section>
+
+    </main>
+</div>
+
+<!-- footer -->
+<footer class="bg-gray-900 py-8 text-[#E7B45A] mt-auto">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-between text-center md:text-left">
+            <!-- Cột 1: Company -->
+            <div class="w-1/4">
+                <h2 class="mb-4 text-lg font-semibold uppercase">Company</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition">About</a></li>
+                    <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition">Brand Center</a></li>
+                    <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 2: Help Center -->
+            <div class="w-1/4">
+                <h2 class="mb-4 text-lg font-semibold uppercase">Help Center</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition">Twitter</a></li>
+                    <li><a href="#" class="hover:text-white transition">Facebook</a></li>
+                    <li><a href="#" class="hover:text-white transition">Support</a></li>
+                    <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 3: Legal -->
+            <div class="w-1/4">
+                <h2 class="mb-4 text-lg font-semibold uppercase">Legal</h2>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition">Licensing</a></li>
+                    <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-white transition">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 4: Contact -->
+            <div class="w-1/4">
+                <h2 class="mb-4 text-lg font-semibold uppercase">Contact</h2>
+                <ul class="space-y-2">
+                    <li><a href="mailto:support@example.com" class="hover:text-white transition">danafinest@gmail.com</a></li>
+                    <li><a href="tel:+1234567890" class="hover:text-white transition">+123 456 7890</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-8 border-t border-gray-700 pt-6 text-center">
+        <span class="text-sm text-gray-400">
+            © 2023 <a href="https://flowbite.com/" class="text-[#E7B45A] hover:underline">Flowbite™</a>. All Rights Reserved.
+        </span>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var menu = document.getElementById("menu");
+        var menuToggle = document.getElementById("toggleOpen");
+        var submenuToggle = document.getElementById("submenu-toggle");
+        var submenu = document.getElementById("submenu");
+
+        // Hiển thị menu chính khi click
+        menuToggle.addEventListener("click", function () {
+            menu.classList.toggle("hidden");
+            menu.classList.toggle("flex");
+        });
+
+        // Hiển thị submenu khi click vào "Menu"
+        submenuToggle.addEventListener("click", function (event) {
+            event.preventDefault(); // Ngăn chặn load lại trang khi click
+            submenu.classList.toggle("opacity-0");
+            submenu.classList.toggle("invisible");
+            submenu.classList.toggle("translate-y-2");
+        });
+    });
+
+</script>
+<script>
+    let currentIndex = 0;
+    const totalItems = 5;
+    const itemsToShow = 3;
+    const products = document.querySelectorAll('#product-slider > div');
+    const nextProducts = document.getElementById('next-products').children;
+
+    function showNextProduct() {
+        if (currentIndex < totalItems - itemsToShow) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Quay lại sản phẩm đầu tiên
+        }
+        updateSliderPosition();
+    }
+
+    function showPrevProduct() {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = totalItems - itemsToShow; // Quay lại sản phẩm cuối cùng
+        }
+        updateSliderPosition();
+    }
+
+    function updateSliderPosition() {
+        const offset = -currentIndex * 100; // Đẩy các món đi sang bên trái
+        document.getElementById('product-slider').style.transform = `translateX(${offset}%)`;
+
+        // Hiển thị/ẩn các món tiếp theo
+        if (currentIndex >= 3) {
+            document.getElementById('next-products').classList.remove('hidden');
+        } else {
+            document.getElementById('next-products').classList.add('hidden');
+        }
+    }
+
+    document.getElementById('next').addEventListener('click', showNextProduct);
+    document.getElementById('prev').addEventListener('click', showPrevProduct);
+
+</script>
